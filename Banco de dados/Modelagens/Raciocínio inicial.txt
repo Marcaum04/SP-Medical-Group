@@ -18,14 +18,11 @@ Paciente
 IdPaciente
 IdUsuario
 IdEndereco
+Telefone(14)
 DataNascimento
+Endereco
 Rg(12)
 Cpf(14)
-
-Telefone
-IdTelefone
-IdUsuario
-Numero(14)
 
 Especialidade
 IdEspecialidade
@@ -49,12 +46,9 @@ IdClinica
 IdEndereco
 NomeFantasia
 RazaoSocial
+Endereco
 Cnpj
 HorarioFuncionamento
-
-Endereco
-idEndereco
-descricao
 
 Se o tipo de usuário for 2(Medico), me mostre ele e seu id
 colocar o id do medico e do cliente que são usuários
