@@ -12,12 +12,12 @@ Senha
 Medico
 IdMedico
 IdUsuario
+IdClinica
 crmv
 
 Paciente
 IdPaciente
 IdUsuario
-IdEndereco
 Telefone(14)
 DataNascimento
 Endereco
@@ -33,9 +33,10 @@ Consulta
 IdConsulta
 IdClinica
 IdMedico
-IdComum
+IdPaciente
 IdSituação
 DataConsulta
+Descricao
 
 Situacao
 IdSituacao
@@ -43,13 +44,12 @@ Descricao
 
 Clinica
 IdClinica
-IdEndereco
 NomeFantasia
 RazaoSocial
 Endereco
 Cnpj
 HorarioFuncionamento
 
-Se o tipo de usuário for 2(Medico), me mostre ele e seu id
-colocar o id do medico e do cliente que são usuários
-porém tem seus id's difentes.
+Usar Default
+Atualizar registros sem data de nascimento
+Importar os dados da planilha pro banco
