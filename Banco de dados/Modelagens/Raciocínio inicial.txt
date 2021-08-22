@@ -1,21 +1,22 @@
-TipoUsuario
+TipoUsuario X
 IdTipoUsuario
 TituloTipoUsuario
 
-Usuario
+Usuario X
 IdUsuario
 IdTipoUsuario
 NomeUsuario
 Email 
 Senha
 
-Medico
+Medico X
 IdMedico
 IdUsuario
 IdClinica
+IdEspecialidade
 crmv
 
-Paciente
+Paciente X
 IdPaciente
 IdUsuario
 Telefone(14)
@@ -24,12 +25,11 @@ Endereco
 Rg(12)
 Cpf(14)
 
-Especialidade
+Especialidade X
 IdEspecialidade
-idMedico
 Descricao
 
-Consulta
+Consulta X
 IdConsulta
 IdClinica
 IdMedico
@@ -38,11 +38,11 @@ IdSituação
 DataConsulta
 Descricao
 
-Situacao
+Situacao X
 IdSituacao
 Descricao
 
-Clinica
+Clinica X
 IdClinica
 NomeFantasia
 RazaoSocial

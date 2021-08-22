@@ -4,8 +4,9 @@ GO
 USE SPMED_MARCAUM;
 GO
 
+--SITUACAO
 CREATE TABLE Situacao(
-	IdSitucao TINYINT PRIMARY KEY IDENTITY,
+	IdSituacao TINYINT PRIMARY KEY IDENTITY,
 	Descricao VARCHAR(15)
 );
 GO
@@ -46,6 +47,33 @@ CREATE TABLE Clinica(
 	RazaoSocial VARCHAR(50),
 	Endereco VARCHAR(150),
 	Cnpj VARCHAR(18),
-	HorarioFuncionamento
+	HorarioAbertura TIME,
+	HorarioFechamento TIME
+);
+GO
+
+--ESPECIALIDADE
+CREATE TABLE Especialidade(
+	IdEspecialidade SMALLINT PRIMARY KEY IDENTITY,
+	Descricao VARCHAR(35)
+);
+GO
+
+--MEDICO
+CREATE TABLE Medico(
+	IdMedico INT PRIMARY KEY IDENTITY,
+	IdUsuario INT FOREIGN KEY REFERENCES Usuario(IdUsuario),
+	IdClinica SMALLINT FOREIGN KEY REFERENCES Clinica(IdClinica),
+	IdEspecialidade SMALLINT FOREIGN KEY REFERENCES Especialidade(IdEspecialidade),
+	Crmv VARCHAR(8)
+);
+GO
+
+--CONSULTA
+CREATE TABLE Consulta(
+	IdConsulta INT PRIMARY KEY IDENTITY,
+	IdMedico INT FOREIGN KEY REFERENCES Medico(IdMedico),
+	IdPaciente INT FOREIGN KEY REFERENCES Paciente(IdPaciente),
+	IdSituacao TINYINT FOREIGN KEY REFERENCES Situacao(IdSituacao),
 );
 GO
