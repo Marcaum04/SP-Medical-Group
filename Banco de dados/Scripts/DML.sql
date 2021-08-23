@@ -34,10 +34,12 @@ VALUES (1, '11 3456-7654', '13/10/1983', 'Rua Estado de Israel 240, São Paulo, E
 	   (7, '', '05/03/2018', 'R Sao Antonio, 232 - Vila Universal, Barueri - SP, 06407-140', '54566266-8', '13771913039')
 GO
 
-INSERT INTO Consulta(IdMedico, IdPaciente, IdMedico)
-VALUES ()
-
-SELECT * FROM Usuario
-SELECT * FROM Especialidade
-SELECT * FROM Medico
-SELECT * FROM Paciente
+INSERT INTO Consulta(IdMedico, IdPaciente, DataeHora, IdSituacao, Descricao)
+VALUES (3, 7, '20/01/2020 15:00', 1, ''),
+	   (2, 2, '06/01/2020 10:00', 2, ''),
+	   (2, 3, '07/02/2020 11:00', 1, ''),
+	   (2, 2, '06/02/2018 10:00', 1, ''),
+	   (1, 4, '07/02/2019 11:00', 2, ''),
+	   (3, 7, '08/03/2020 15:00', 3, ''),
+	   (1, 4, '09/03/2020 11:00', 2, '')
+GO
