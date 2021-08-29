@@ -8,7 +8,7 @@ WHERE IdEspecialidade = 17
 GO
 
 --Criou uma função para retornar a quantidade de médicos de uma determinada especialidade
-ALTER PROCEDURE P_Idade
+CREATE PROCEDURE P_Idade
 AS  
 SELECT  NomeUsuario, DATEDIFF(YEAR, (DataNascimento), GETDATE()) AS 'Idade'
 FROM Paciente
@@ -19,4 +19,11 @@ GO
 EXEC P_Idade;
 GO
 
-SELECT * FROM Paciente
+--Converteu a data de nascimento do usuário para o formato (mm-dd-yyyy) na exibição
+SELECT  NomeUsuario 'Nome', FORMAT (DataNascimento, 'dd-MM-yyyy') 'Data Nascimento' FROM Paciente 
+INNER JOIN Usuario
+ON Usuario.IdUsuario = Paciente.IdUsuario
+
+--Mostrou a quantidade de usuários após realizar a importação do banco de dados
+SELECT COUNT(IdUsuario) 'Quantidade de usuários' FROM Usuario;
+GO
