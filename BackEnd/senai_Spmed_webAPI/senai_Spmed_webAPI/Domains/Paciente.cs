@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -18,9 +19,15 @@ namespace senai_Spmed_webAPI.Domains
         public int IdPaciente { get; set; }
         public int IdUsuario { get; set; }
         public string Telefone { get; set; }
+
+        [Required(ErrorMessage = "A data de nascimento é obrigatória")]
         public DateTime DataNascimento { get; set; }
         public string Endereco { get; set; }
+
+        [Required(ErrorMessage = "O Rg do paciente é obrigatório")]
         public string Rg { get; set; }
+        
+        [Required(ErrorMessage = "O Cpf do paciente é obrigatório")]
         public string Cpf { get; set; }
 
         public virtual Usuario IdUsuarioNavigation { get; set; }

@@ -41,7 +41,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// <summary>
         /// Busca um médico pelo seu id
         /// </summary>
-        /// <param name="idMedico">id do mpedico a ser buscado</param>
+        /// <param name="idMedico">id do médico a ser buscado</param>
         /// <returns>Um médico encontrado com o status code 200 - Ok</returns>
         [HttpGet("{idMedico}")]
         public IActionResult BuscarPorId(int idMedico)
@@ -57,6 +57,7 @@ namespace senai_Spmed_webAPI.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Medico novoMedico)
         {
+            
             _medicoRepository.Cadastrar(novoMedico);
 
             return StatusCode(201);

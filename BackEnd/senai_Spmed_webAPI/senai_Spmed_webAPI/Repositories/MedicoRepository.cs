@@ -44,7 +44,7 @@ namespace senai_Spmed_webAPI.Repositories
 
         public Medico BuscarPorId(int idMedico)
         {
-            return ctx.Medicos.Include(u => u.IdUsuarioNavigation).Include(e => e.IdEspecialidadeNavigation).FirstOrDefault(m => m.IdMedico == idMedico);
+            return ctx.Medicos.Include(u => u.IdUsuarioNavigation).Include(c => c.IdClinicaNavigation).Include(e => e.IdEspecialidadeNavigation).FirstOrDefault(m => m.IdMedico == idMedico);
         }
 
         public void Cadastrar(Medico novoMedico)
@@ -65,7 +65,7 @@ namespace senai_Spmed_webAPI.Repositories
 
         public List<Medico> Listar()
         {
-            return ctx.Medicos.Include(u => u.IdUsuarioNavigation).Include(e => e.IdEspecialidadeNavigation).ToList();
+            return ctx.Medicos.Include(u => u.IdUsuarioNavigation).Include(c => c.IdClinicaNavigation).Include(e => e.IdEspecialidadeNavigation).ToList();
         }
     }
 }
