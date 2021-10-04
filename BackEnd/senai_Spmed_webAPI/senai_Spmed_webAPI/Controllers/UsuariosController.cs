@@ -46,7 +46,13 @@ namespace senai_Spmed_webAPI.Controllers
         [HttpGet("{idUsuario}")]
         public IActionResult BuscarPorId(int idUsuario)
         {
-            return Ok(_usuarioRepository.BuscarPorId(idUsuario));
+            Usuario usuarioBuscado = _usuarioRepository.BuscarPorId(idUsuario);
+
+            if(usuarioBuscado == null)
+            {
+                return NotFound("O Usuário informado não existe!");
+            }
+            return Ok(usuarioBuscado);
         }
         
         /// <summary>
@@ -70,9 +76,24 @@ namespace senai_Spmed_webAPI.Controllers
         [HttpPut]
         public IActionResult Atualizar(Usuario usuarioAtualizado)
         {
-            _usuarioRepository.Atualizar(usuarioAtualizado);
-
-            return StatusCode(204);
+            try
+            {
+                Usuario usuarioBuscado = _usuarioRepository.BuscarPorId(usuarioAtualizado.IdUsuario);
+                if (usuarioBuscado != null)
+                {
+                    if (usuarioAtualizado != null)
+                    _usuarioRepository.Atualizar(usuarioAtualizado);
+                }
+                else
+                {
+                    return BadRequest(new { mensagem = "O usuário informado não existe" });
+                }
+                return StatusCode(204);
+            }
+            catch (Exception ex)
+            {
+                    return BadRequest(ex);
+            }
         }
 
         /// <summary>

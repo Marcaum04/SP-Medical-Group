@@ -4,6 +4,29 @@
         <name>senai_Spmed_webAPI</name>
     </assembly>
     <members>
+        <member name="P:senai_Spmed_webAPI.Controllers.ConsultasController._consultaRepository">
+            <summary>
+            Objeto que irá receber todos os métodos definidos na interface
+            </summary>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Controllers.ConsultasController.#ctor">
+            <summary>
+            Instancia o objeto para que haja referência às implementações feitas no repositório
+            </summary>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Controllers.ConsultasController.Listar">
+            <summary>
+            Lista todas as Consultas existentes
+            </summary>
+            <returns>Uma lista de consultas com o status code 200 - Ok</returns>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Controllers.ConsultasController.BuscarPorId(System.Int32)">
+            <summary>
+            Busca uma consulta pelo seu id
+            </summary>
+            <param name="idConsulta">id da consulta a ser buscada</param>
+            <returns>Uma consulta encontrada com o status code 200 - Ok</returns>
+        </member>
         <member name="M:senai_Spmed_webAPI.Controllers.LoginController.Login(senai_Spmed_webAPI.ViewModels.LoginViewModel)">
             <summary>
             Valida o usuário
@@ -183,6 +206,57 @@
             <summary>
             Classe que representa entidade (tabela) de Usuários
             </summary>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.AlterarStatus(System.Int32,System.Int32)">
+            <summary>
+            Altera o status de uma consulta
+            </summary>
+            <param name="idConsulta">Id da consulta a ser atualizada</param>
+            <param name="idSituacao">Id da nova situação de consulta</param>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.ListarMinhas(System.Int32)">
+            <summary>
+            Lista as consulta relacionadas a um usuario
+            </summary>
+            <param name="idUsuario">Id do usuário a ter suas consultas listadas</param>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.AdicionarDescricao(System.Int32,System.String)">
+            <summary>
+            Atualiza a descrição de uma consulta 
+            </summary>
+            <param name="idConsulta">Id da consulta a ser atualizada</param>
+            <param name="descricao">Descrição as ser atualizada</param>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca por um consulta pelo seu ID
+            </summary>
+            <param name="idConsulta">ID do consulta a ser buscado</param>
+            <returns>Consulta encontrada</returns>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.Cadastrar(senai_Spmed_webAPI.Domains.Consulta)">
+            <summary>
+            Cadastra uma consulta
+            </summary>
+            <param name="novaConsulta">Recebe os dados de uma consulta cadastrada</param>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.Listar">
+            <summary>
+            Lista todas as consultas
+            </summary>
+            <returns> Uma lista de consultas</returns>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.Atualizar(senai_Spmed_webAPI.Domains.Consulta)">
+            <summary>
+            Atualiza os dados de uma consulta
+            </summary>
+            <param name="consultaAtualizada">Recebe os novos dados da consulta</param>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma consulta
+            </summary>
+            <param name="idConsulta"> ID da consulta a ser deletada</param>
         </member>
         <member name="M:senai_Spmed_webAPI.Interfaces.IMedicoRepository.BuscarPorId(System.Int32)">
             <summary>

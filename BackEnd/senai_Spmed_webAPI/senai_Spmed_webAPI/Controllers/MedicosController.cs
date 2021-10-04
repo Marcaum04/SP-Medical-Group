@@ -46,7 +46,13 @@ namespace senai_Spmed_webAPI.Controllers
         [HttpGet("{idMedico}")]
         public IActionResult BuscarPorId(int idMedico)
         {
-            return Ok(_medicoRepository.BuscarPorId(idMedico));
+            Medico medicoBuscado = _medicoRepository.BuscarPorId(idMedico);
+
+            if (medicoBuscado == null)
+            {
+                return NotFound("O Medico informado não existe!");
+            }
+            return Ok(medicoBuscado);
         }
 
         /// <summary>
@@ -57,7 +63,6 @@ namespace senai_Spmed_webAPI.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Medico novoMedico)
         {
-            
             _medicoRepository.Cadastrar(novoMedico);
 
             return StatusCode(201);
@@ -71,7 +76,24 @@ namespace senai_Spmed_webAPI.Controllers
         [HttpPut]
         public IActionResult Atualizar(Medico medicoAtualizado)
         {
-            _medicoRepository.Atualizar(medicoAtualizado);
+            try
+            {
+                Medico medicoBuscado = _medicoRepository.BuscarPorId(medicoAtualizado.IdMedico);
+                if (medicoBuscado != null)
+                {
+                    if (medicoAtualizado != null)
+                        _medicoRepository.Atualizar(medicoAtualizado);
+                }
+                else
+                {
+                    return BadRequest(new { mensagem = "O Médico informado não existe" });
+                }
+                return StatusCode(204);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
 
             return StatusCode(204);
         }
