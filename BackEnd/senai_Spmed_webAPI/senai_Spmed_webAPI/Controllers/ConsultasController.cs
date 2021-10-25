@@ -54,5 +54,57 @@ namespace senai_Spmed_webAPI.Controllers
             }
             return Ok(ConsultaBuscada);
         }
+
+        /// <summary>
+        /// Cadastra uma Consulta
+        /// </summary>
+        /// <param name="novaConsulta">Consulta a ser cadastrada</param>
+        /// <returns>Um status code 201 - Created</returns>
+        [HttpPost]
+        public IActionResult Cadastrar(Consulta novaConsulta)
+        {
+            _consultaRepository.Cadastrar(novaConsulta);
+
+            return StatusCode(201);
+        }
+
+        /// <summary>
+        /// Atualiza uma consulta existente
+        /// </summary>
+        /// <param name="consultaAtualizada">Objeto com as novas informações da Consulta e o id da consulta a ser atualizada</param>
+        /// <returns>Um status code 204 - No content</returns>
+        [HttpPut]
+        public IActionResult Atualizar(Consulta consultaAtualizada)
+        {
+            try
+            {
+                Consulta consultaBuscada = _consultaRepository.BuscarPorId(consultaAtualizada.IdConsulta);
+                if (consultaBuscada != null)
+                {
+                    _consultaRepository.Atualizar(consultaAtualizada);
+                    return StatusCode(204);
+                }
+                else
+                {
+                    return BadRequest(new { mensagem = "A Consulta informada não existe" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        /// <summary>
+        /// Deleta uma consulta
+        /// </summary>
+        /// <param name="idConsulta">id da Consulta a ser deletada</param>
+        /// <returns>Um status code 204 - No content</returns>
+        [HttpDelete("{idConsulta}")]
+        public IActionResult Deletar(int idConsulta)
+        {
+            _consultaRepository.Deletar(idConsulta);
+
+            return StatusCode(204);
+        }
     }
 }

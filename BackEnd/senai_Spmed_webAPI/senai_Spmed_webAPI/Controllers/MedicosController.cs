@@ -94,8 +94,6 @@ namespace senai_Spmed_webAPI.Controllers
             {
                 return BadRequest(ex);
             }
-
-            return StatusCode(204);
         }
 
         /// <summary>

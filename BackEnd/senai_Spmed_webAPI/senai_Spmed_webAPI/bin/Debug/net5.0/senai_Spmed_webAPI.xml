@@ -27,6 +27,27 @@
             <param name="idConsulta">id da consulta a ser buscada</param>
             <returns>Uma consulta encontrada com o status code 200 - Ok</returns>
         </member>
+        <member name="M:senai_Spmed_webAPI.Controllers.ConsultasController.Cadastrar(senai_Spmed_webAPI.Domains.Consulta)">
+            <summary>
+            Cadastra uma Consulta
+            </summary>
+            <param name="novaConsulta">Consulta a ser cadastrada</param>
+            <returns>Um status code 201 - Created</returns>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Controllers.ConsultasController.Atualizar(senai_Spmed_webAPI.Domains.Consulta)">
+            <summary>
+            Atualiza uma consulta existente
+            </summary>
+            <param name="consultaAtualizada">Objeto com as novas informações da Consulta e o id da consulta a ser atualizada</param>
+            <returns>Um status code 204 - No content</returns>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Controllers.ConsultasController.Deletar(System.Int32)">
+            <summary>
+            Deleta uma consulta
+            </summary>
+            <param name="idConsulta">id da Consulta a ser deletada</param>
+            <returns>Um status code 204 - No content</returns>
+        </member>
         <member name="M:senai_Spmed_webAPI.Controllers.LoginController.Login(senai_Spmed_webAPI.ViewModels.LoginViewModel)">
             <summary>
             Valida o usuário
@@ -206,6 +227,37 @@
             <summary>
             Classe que representa entidade (tabela) de Usuários
             </summary>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IClinicaRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca por uma clinica pelo seu ID
+            </summary>
+            <param name="idClinica">ID da clinica a ser buscada</param>
+            <returns>Clínica encontrada</returns>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IClinicaRepository.Cadastrar(senai_Spmed_webAPI.Domains.Clinica)">
+            <summary>
+            Cadastra uma clinica
+            </summary>
+            <param name="novaClinica">Recebe os dados de uma clínica cadastrada</param>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IClinicaRepository.Listar">
+            <summary>
+            Lista todas as clinicas
+            </summary>
+            <returns> Uma lista de clinicas</returns>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IClinicaRepository.Atualizar(senai_Spmed_webAPI.Domains.Clinica)">
+            <summary>
+            Atualiza os dados de uma clinica
+            </summary>
+            <param name="clinicaAtualizada">Recebe os novos dados da clinica</param>
+        </member>
+        <member name="M:senai_Spmed_webAPI.Interfaces.IClinicaRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma clínica
+            </summary>
+            <param name="idClinica"> ID da clínica a ser deletada</param>
         </member>
         <member name="M:senai_Spmed_webAPI.Interfaces.IConsultaRepository.AlterarStatus(System.Int32,System.Int32)">
             <summary>

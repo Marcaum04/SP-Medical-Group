@@ -47,6 +47,10 @@ namespace senai_Spmed_webAPI.Repositories
             {
                 consultaBuscada.Descricao = consultaAtualizada.Descricao;
             }
+
+            ctx.Consulta.Update(consultaBuscada);
+
+            ctx.SaveChanges();
         }
 
         public Consulta BuscarPorId(int idConsulta)
@@ -98,7 +102,8 @@ namespace senai_Spmed_webAPI.Repositories
                     {
                         IdSituacao = c.IdSituacaoNavigation.IdSituacao,
                         Descricao = c.IdSituacaoNavigation.Descricao
-                    }
+                    },
+                    DataeHora = c.DataeHora
                 }).FirstOrDefault(c => c.IdConsulta == idConsulta);
         }
 
@@ -166,7 +171,8 @@ namespace senai_Spmed_webAPI.Repositories
                     {
                         IdSituacao = c.IdSituacaoNavigation.IdSituacao,
                         Descricao = c.IdSituacaoNavigation.Descricao
-                    }
+                    },
+                    DataeHora = c.DataeHora
                 })
                 .ToList();
         }
