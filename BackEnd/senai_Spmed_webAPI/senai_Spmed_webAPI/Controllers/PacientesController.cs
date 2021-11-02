@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai_Spmed_webAPI.Domains;
 using senai_Spmed_webAPI.Interfaces;
@@ -32,6 +33,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// Lista todos os Pacientes existentes
         /// </summary>
         /// <returns>Uma lista de pacientes com o status code 200 - Ok</returns>
+        [Authorize(Roles = "1")]
         [HttpGet]
         public IActionResult Listar()
         {
@@ -43,6 +45,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="idPaciente">id do paciente a ser buscado</param>
         /// <returns>Um paciente encontrado com o status code 200 - Ok</returns>
+        [Authorize(Roles = "1")]
         [HttpGet("{idPaciente}")]
         public IActionResult BuscarPorId(int idPaciente)
         {
@@ -60,6 +63,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="novoPaciente">Paciente a ser cadastrado</param>
         /// <returns>Um status code 201 - Created</returns>
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Cadastrar(Paciente novoPaciente)
         {
@@ -81,6 +85,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="pacienteAtualizado">Objeto com as novas informações do Paciente e o id do paciente a ser atualizado</param>
         /// <returns>Um status code 204 - No content</returns>
+        [Authorize(Roles = "1")]
         [HttpPut]
         public IActionResult Atualizar(Paciente pacienteAtualizado)
         {
@@ -118,6 +123,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="idPaciente">id do Paciente a ser deletado</param>
         /// <returns>Um status code 204 - No content</returns>
+        [Authorize(Roles = "1")]
         [HttpDelete("{idPaciente}")]
         public IActionResult Deletar(int idPaciente)
         {

@@ -30,6 +30,8 @@ GO
 
 SELECT * FROM Consulta
 
+SELECT * FROM Situacao
+
 UPDATE Consulta
 SET IdMedico = 3,
 IdPaciente = 3,

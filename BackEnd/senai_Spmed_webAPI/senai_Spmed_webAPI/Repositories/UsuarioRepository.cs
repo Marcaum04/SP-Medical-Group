@@ -1,8 +1,10 @@
-﻿using senai_Spmed_webAPI.Context;
+﻿using Microsoft.AspNetCore.Http;
+using senai_Spmed_webAPI.Context;
 using senai_Spmed_webAPI.Domains;
 using senai_Spmed_webAPI.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,6 +50,33 @@ namespace senai_Spmed_webAPI.Repositories
             ctx.SaveChanges();
         }
 
+        public string ConsultarPerfilDir(int id_usuario)
+        {
+            CriarPasta();
+
+            string nome_novo = id_usuario.ToString() + ".png";
+            string caminho = Path.Combine("Perfil", nome_novo);
+
+            if (File.Exists(caminho))
+            {
+                byte[] bytesArquivo = File.ReadAllBytes(caminho);
+                return Convert.ToBase64String(bytesArquivo);
+            }
+
+            return null;
+
+        }
+
+        public void CriarPasta()
+        {
+            string pasta = "Perfil";
+
+            if (!Directory.Exists(pasta))
+            {
+                Directory.CreateDirectory(pasta);
+            }
+        }
+
         public void Deletar(int idUsuario)
         {
             Usuario usuarioBuscado = BuscarPorId(idUsuario);
@@ -65,6 +94,16 @@ namespace senai_Spmed_webAPI.Repositories
         public Usuario Login(string email, string senha)
         {
             return ctx.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+        }
+
+        public void SalvarPerfilDir(IFormFile foto, int id_usuario)
+        {
+            string nome_novo = id_usuario.ToString() + ".png";
+
+            using (var stream = new FileStream(Path.Combine("Perfil", nome_novo), FileMode.Create))
+            {
+                foto.CopyTo(stream);
+            }
         }
     }
 }

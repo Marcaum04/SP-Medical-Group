@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai_Spmed_webAPI.Domains;
 using senai_Spmed_webAPI.Interfaces;
@@ -32,6 +33,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// Lista todos os Médicos existentes
         /// </summary>
         /// <returns>Uma lista de médicos com o status code 200 - Ok</returns>
+        [Authorize(Roles = "1")]
         [HttpGet]
         public IActionResult Listar()
         {
@@ -43,6 +45,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="idMedico">id do médico a ser buscado</param>
         /// <returns>Um médico encontrado com o status code 200 - Ok</returns>
+        [Authorize(Roles = "1")]
         [HttpGet("{idMedico}")]
         public IActionResult BuscarPorId(int idMedico)
         {
@@ -60,6 +63,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="novoMedico">Médico a ser cadastrado</param>
         /// <returns>Um status code 201 - Created</returns>
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Cadastrar(Medico novoMedico)
         {
@@ -73,6 +77,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="medicoAtualizado">Objeto com as novas informações do Médico e o id do médico a ser atualizado</param>
         /// <returns>Um status code 204 - No content</returns>
+        [Authorize(Roles = "1")]
         [HttpPut]
         public IActionResult Atualizar(Medico medicoAtualizado)
         {
@@ -101,6 +106,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="idMedico">id do Médico a ser deletado</param>
         /// <returns>Um status code 204 - No content</returns>
+        [Authorize(Roles = "1")]
         [HttpDelete("{idMedico}")]
         public IActionResult Deletar(int idMedico)
         {

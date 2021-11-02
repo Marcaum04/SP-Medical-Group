@@ -14,12 +14,48 @@ namespace senai_Spmed_webAPI.Repositories
         SpmedContext ctx = new SpmedContext();
         public void AdicionarDescricao(int idConsulta, string descricao)
         {
-            throw new NotImplementedException();
+            Consulta consultaBuscada = BuscarPorId(idConsulta);
+
+            if(descricao == null || descricao == "")
+            {
+                consultaBuscada.Descricao = consultaBuscada.Descricao;
+            }
+            else
+            {
+                consultaBuscada.Descricao = descricao;
+            }
+
+            ctx.Consulta.Update(consultaBuscada);
+
+            ctx.SaveChanges();
         }
 
-        public void AlterarStatus(int idConsulta, int idSituacao)
+        public void AlterarStatus(int idConsulta, int status)
         {
-            throw new NotImplementedException();
+            Consulta consultaBuscada = BuscarPorId(idConsulta);
+
+            switch (status)
+            {
+                case 1:
+                    consultaBuscada.IdSituacao = 1;
+                    break;
+
+                case 2:
+                    consultaBuscada.IdSituacao = 2;
+                    break;
+
+                case 3:
+                    consultaBuscada.IdSituacao = 3;
+                    break;
+
+                default:
+                    consultaBuscada.IdSituacao = consultaBuscada.IdSituacao;
+                    break;
+            }
+
+            ctx.Consulta.Update(consultaBuscada);
+
+            ctx.SaveChanges();
         }
 
         public void Atualizar(Consulta consultaAtualizada)
@@ -55,56 +91,7 @@ namespace senai_Spmed_webAPI.Repositories
 
         public Consulta BuscarPorId(int idConsulta)
         {
-            return ctx.Consulta
-                .Select(c => new Consulta()
-                {
-                    IdConsulta = c.IdConsulta,
-                    IdMedico = c.IdMedico,
-                    IdMedicoNavigation = new Medico()
-                    {
-                        IdMedico = c.IdMedicoNavigation.IdMedico,
-                        IdUsuario = c.IdMedicoNavigation.IdUsuario,
-                        IdUsuarioNavigation = new Usuario()
-                        {
-                            IdUsuario = c.IdMedicoNavigation.IdUsuarioNavigation.IdUsuario,
-                            NomeUsuario = c.IdMedicoNavigation.IdUsuarioNavigation.NomeUsuario,
-                            Email = c.IdMedicoNavigation.IdUsuarioNavigation.Email,
-                            Senha = c.IdMedicoNavigation.IdUsuarioNavigation.Senha
-                        },
-                        IdEspecialidade = c.IdMedicoNavigation.IdEspecialidade,
-                        IdEspecialidadeNavigation = new Especialidade()
-                        {
-                            IdEspecialidade = c.IdMedicoNavigation.IdEspecialidade,
-                            Descricao = c.IdMedicoNavigation.IdEspecialidadeNavigation.Descricao
-                        },
-                        Crmv = c.IdMedicoNavigation.Crmv
-                    },
-                    IdPaciente = c.IdPaciente,
-                    IdPacienteNavigation = new Paciente()
-                    {
-                        IdPaciente = c.IdPacienteNavigation.IdPaciente,
-                        IdUsuario = c.IdPacienteNavigation.IdUsuario,
-                        IdUsuarioNavigation = new Usuario()
-                        {
-                            IdUsuario = c.IdPacienteNavigation.IdUsuarioNavigation.IdUsuario,
-                            NomeUsuario = c.IdPacienteNavigation.IdUsuarioNavigation.NomeUsuario,
-                            Email = c.IdPacienteNavigation.IdUsuarioNavigation.Email,
-                            Senha = c.IdPacienteNavigation.IdUsuarioNavigation.Senha
-                        },
-                        Telefone = c.IdPacienteNavigation.Telefone,
-                        DataNascimento = c.IdPacienteNavigation.DataNascimento,
-                        Endereco = c.IdPacienteNavigation.Endereco,
-                        Rg = c.IdPacienteNavigation.Rg,
-                        Cpf = c.IdPacienteNavigation.Cpf
-                    },
-                    IdSituacao = c.IdSituacao,
-                    IdSituacaoNavigation = new Situacao()
-                    {
-                        IdSituacao = c.IdSituacaoNavigation.IdSituacao,
-                        Descricao = c.IdSituacaoNavigation.Descricao
-                    },
-                    DataeHora = c.DataeHora
-                }).FirstOrDefault(c => c.IdConsulta == idConsulta);
+            return ctx.Consulta.Include(m => m.IdMedicoNavigation).Include(p => p.IdPacienteNavigation).Include(s => s.IdSituacaoNavigation).FirstOrDefault(c => c.IdConsulta == idConsulta);
         }
 
         public void Cadastrar(Consulta novaConsulta)
@@ -125,61 +112,17 @@ namespace senai_Spmed_webAPI.Repositories
 
         public List<Consulta> Listar()
         {
-            return ctx.Consulta
-                .Select(c => new Consulta() { 
-                    IdConsulta = c.IdConsulta,
-                    IdMedico = c.IdMedico,
-                    IdMedicoNavigation = new Medico()
-                    {
-                        IdMedico = c.IdMedicoNavigation.IdMedico,
-                        IdUsuario = c.IdMedicoNavigation.IdUsuario,
-                        IdUsuarioNavigation = new Usuario()
-                        {
-                            IdUsuario = c.IdMedicoNavigation.IdUsuarioNavigation.IdUsuario,
-                            NomeUsuario = c.IdMedicoNavigation.IdUsuarioNavigation.NomeUsuario,
-                            Email = c.IdMedicoNavigation.IdUsuarioNavigation.Email,
-                            Senha = c.IdMedicoNavigation.IdUsuarioNavigation.Senha
-                        },
-                        IdEspecialidade = c.IdMedicoNavigation.IdEspecialidade,
-                        IdEspecialidadeNavigation = new Especialidade()
-                        {
-                            IdEspecialidade = c.IdMedicoNavigation.IdEspecialidade,
-                            Descricao = c.IdMedicoNavigation.IdEspecialidadeNavigation.Descricao
-                        },
-                        Crmv = c.IdMedicoNavigation.Crmv
-                    },
-                    IdPaciente = c.IdPaciente,
-                    IdPacienteNavigation = new Paciente()
-                    {
-                        IdPaciente = c.IdPacienteNavigation.IdPaciente,
-                        IdUsuario = c.IdPacienteNavigation.IdUsuario,
-                        IdUsuarioNavigation = new Usuario()
-                        {
-                            IdUsuario = c.IdPacienteNavigation.IdUsuarioNavigation.IdUsuario,
-                            NomeUsuario = c.IdPacienteNavigation.IdUsuarioNavigation.NomeUsuario,
-                            Email = c.IdPacienteNavigation.IdUsuarioNavigation.Email,
-                            Senha = c.IdPacienteNavigation.IdUsuarioNavigation.Senha
-                        },
-                        Telefone = c.IdPacienteNavigation.Telefone,
-                        DataNascimento = c.IdPacienteNavigation.DataNascimento,
-                        Endereco = c.IdPacienteNavigation.Endereco,
-                        Rg = c.IdPacienteNavigation.Rg,
-                        Cpf = c.IdPacienteNavigation.Cpf
-                    },
-                    IdSituacao = c.IdSituacao,
-                    IdSituacaoNavigation = new Situacao()
-                    {
-                        IdSituacao = c.IdSituacaoNavigation.IdSituacao,
-                        Descricao = c.IdSituacaoNavigation.Descricao
-                    },
-                    DataeHora = c.DataeHora
-                })
-                .ToList();
+            return ctx.Consulta.Include(m => m.IdMedicoNavigation).Include(p => p.IdPacienteNavigation).Include(s => s.IdSituacaoNavigation).ToList();
         }
 
         public List<Consulta> ListarMinhas(int idUsuario)
         {
-            throw new NotImplementedException();
+            return ctx.Consulta
+               .Include(p => p.IdMedicoNavigation)
+               .Include(p => p.IdPacienteNavigation)
+               .Include(p => p.IdSituacaoNavigation)
+               .Where(p => p.IdMedicoNavigation.IdUsuario == idUsuario || p.IdPacienteNavigation.IdUsuario == idUsuario)
+               .ToList();
         }
     }
 }
