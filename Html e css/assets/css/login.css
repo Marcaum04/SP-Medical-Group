@@ -1,0 +1,23 @@
+/* Reset da página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #01A632;
+}
+
+/* Logo Header */
+header{
+    display: flex;
+    justify-content: right;
+}
+
+.logo{
+    height: 150px;
+    margin-right: 120px;
+}
+
+/* Foto e caixa de login */
+.container_login{
+    display: flex;
+}
