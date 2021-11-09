@@ -1,0 +1,29 @@
+.quadrado_situacao{
+    background-color: green;
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+    border: black solid 0.5px;
+}
+
+option{ 
+    font-weight: bold; 
+    font-size: 12px; 
+    text-align: center;
+}
+
+option:hover{
+    color: none;
+}
+
+.realizada{
+    color: green;
+}
+
+.cancelada{
+    color: red;
+}
+
+.agendada{
+    color: yellow;
+}
