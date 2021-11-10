@@ -37,11 +37,12 @@
                 <input type="number">
             </div>
             <div class="campo">
-                <input type="option">
-                <select name="situacao" id="">
-                    <option class="realizada" value="1">Realizada</option>
-                    <option class="cancelada" value="2">Cancelada</option>
-                    <option class="agendada" value="3">Agendada</option>
+                <label for="situacao">Situação</label>
+                <select class="situacao" id="situacao" name="situacao">
+                    <option disabled class="neutro"> Escolha uma Situação</option>
+                    <option class="realizada" value="Realizada">Realizada</option>
+                    <option value="Cancelada">Cancelada</option>
+                    <option value="Agendada">Agendada</option>
                 </select>
             </div>
         </form>
