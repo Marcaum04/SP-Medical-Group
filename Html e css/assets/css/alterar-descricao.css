@@ -3,7 +3,6 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 561px;
 }
 
 /* Titulo */
@@ -23,100 +22,63 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 
     background-color: rgba(255, 255, 255, 80%);
 
-    height: 300px;
-    width: 700px;
+    width: 600px;
     border-radius: 50px;
 
     margin-top: 25px;
     margin-bottom: 25px;
-}
-
-.todos-campos{
-    display: flex;
-    justify-content: space-between;
-    width: 500px;
+    padding: 30px;
 }
 
 .campos{
-    height: 130px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
-.campo{
+.campo-consulta{
     width: 280px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
 }
 
-.campo label,
-.campo-tempo label{
+.campo-descricao{
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-consulta label,
+.campo-descricao label{
     color: black;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 25px;  
     font-weight: bold;  
 }
 
-.campo input{
-    width: 170px;
-    height: 30px;
+.campo-descricao textarea{
+    width: 450px;
+    padding: 10px;
+    text-align: justify;
+    resize: vertical
+}
 
+.campo-consulta input,
+.campo-descricao textarea{
     border-radius: 10px;
     border: none;
-    text-align: center;
 }
-
-/* Input de situação */
-.situacao{
-    cursor: pointer;
-    border: 1px solid #DDDDDD;
-    border-radius: 5px 5px 0px 0px;
-    
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bold;
-    text-align: center;
-    font-size: 15px;
-
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    
-    background-color: #FFFFFF;
-    background-image: url("../img/seta.png");
-    background-position: right 5px top 50%;
-    background-repeat: no-repeat;
-    background-size: 10px;
-    
-    padding-right: 15px;
-    padding: 5px 10px;
-    width: 170px;
-}
-
-.situacao:focus,
-.situacao:hover{
-    outline: none;
-    border: 1px solid #BBBBBB;
-}
-
-.situacao option{
-    background-color: #FFFFFF;
-    font-weight: bold;
-}
-
-.neutro{
-    color: gray;
-}
-
 /* botão */
 form button{
     width: 200px;
     height: 40px;
     border-radius: 30px 110px 30px 110px;
+    margin-bottom: 50px;
     
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

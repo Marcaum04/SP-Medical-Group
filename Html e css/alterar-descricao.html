@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Consulta - SPMED</title>
+    <title>Atualizar Descrição - SPMED</title>
     <link rel="shortcut icon" href="assets/img/Logo.png" type="image/png">
     <link rel="stylesheet" href="assets/css/grid.css">
-    <link rel="stylesheet" href="assets/css/cadastrar-consulta.css">
+    <link rel="stylesheet" href="assets/css/alterar-descricao.css">
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/footer.css">
 </head>
@@ -29,35 +29,14 @@
         <form action="">
             <div class="cadastro">
                 <h1>Consulta</h1>
-                <div class="todos-campos">
-                    <div class="campos">
-                        <div class="campo">
-                            <label for="">Médico</label>
-                            <input type="number">
-                        </div>
-                        <div class="campo">
-                            <label for="">Paciente</label>
-                            <input type="number">
-                        </div>
-                        <div class="campo">
-                            <label for="situacao">Situação</label>
-                            <select class="situacao" id="situacao" name="situacao">
-                                <option disabled class="neutro"> Escolha uma Situação</option>
-                                <option class="realizada" value="Realizada"><span>■</span> Realizada</option>
-                                <option value="Cancelada"><span>■</span> Cancelada</option>
-                                <option value="Agendada"><span>■</span> Agendada</option>
-                            </select>
-                        </div>
+                <div class="campos">
+                    <div class="campo-consulta">
+                        <label for="">Consulta</label>
+                        <input type="number">
                     </div>
-                    <div class="campos">
-                        <div class="campo-tempo">
-                            <label for="">Data</label>
-                            <input class="data" type="date">
-                        </div>
-                        <div class="campo-tempo">
-                            <label class="hora" for="">Hora</label>
-                            <input type="time">
-                        </div>
+                    <div class="campo-descricao">
+                        <label for="">Descrição</label>
+                        <textarea name="" id="" cols="30" rows="10" maxlength="100"></textarea>
                     </div>
                 </div>
             </div>

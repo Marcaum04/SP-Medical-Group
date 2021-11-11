@@ -95,3 +95,8 @@ header{
     border: none;
     background-color: #FC4E57;
 }
+
+.formulario_login button:hover{
+    background-color: #fc6b73;
+    cursor: pointer;
+}
