@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/img/Logo-Vermelho.png';
 import Home from '../../assets/img/home-icon.png';
@@ -16,10 +17,10 @@ export default function Header() {
         <div className="container container_header">
             <img className="logo_header" src={Logo} alt="Logo Vermelho"></img>
             <nav className="nav_header">
-                <a href="/"><img className="icone_nav" src={Home} alt="Icone home"></img></a>
-                <a href="/sobre-nos"><img className="icone_nav" src={SobreNos} alt="Icone Sobre nós"></img></a>
-                <a href="/consultas"><img className="icone_nav" src={Consultas} alt="Icone Consultas"></img></a>
-                <a href="/login"><img className="icone_nav" src={Perfil} alt="Icone Perfil"></img></a>
+                <Link to="/"><img className="icone_nav" src={Home} alt="Icone home"></img></Link>
+                <Link to="/sobre-nos"><img className="icone_nav" src={SobreNos} alt="Icone Sobre nós"></img></Link>
+                <Link to="/consultas"><img className="icone_nav" src={Consultas} alt="Icone Consultas"></img></Link>
+                <Link to="/login"><img className="icone_nav" src={Perfil} alt="Icone Perfil"></img></Link>
             </nav>
         </div>
     </header>
