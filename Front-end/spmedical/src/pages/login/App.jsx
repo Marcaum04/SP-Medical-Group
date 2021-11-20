@@ -22,7 +22,7 @@ export default class Login extends Component {
     .then(resposta =>{
       if (resposta.status === 200) {
         console.log('Meu token é: ' + resposta.data.token);
-        localStorage.getItem('usuario-login', '123')
+        localStorage.setItem('usuario-login', resposta.data.token);
       }
     })
   }
