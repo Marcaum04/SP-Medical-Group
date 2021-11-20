@@ -1,0 +1,19 @@
+.container_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo_header{
+    height: 80px;
+}
+
+.nav_header{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.icone_nav{
+    height: 50px;
+}
