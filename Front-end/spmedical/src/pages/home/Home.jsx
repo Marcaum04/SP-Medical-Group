@@ -15,8 +15,28 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            listaClinicas: []
         }
     };
+
+    buscarClinicas = () => {
+        axios('http://localhost:5000/api/clinicas', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    this.setState({ listaClinicas: resposta.data });
+                    console.log(this.state.listaClinicas);
+                }
+            })
+            .catch((erro) => console.log(erro));
+    }
+
+    componentDidMount() {
+        this.buscarClinicas();
+    }
 
     render() {
         return (
@@ -48,23 +68,28 @@ export default class Login extends Component {
                     <div className="container_onde_estamos">
                         <div className="container onde_estamos">
                             <h2>Onde estamos?</h2>
+                            {this.state.listaClinicas.map((Clinic) => {
+                                return(
                             <div className="clinica">
                                 <img src={Clinica} alt="clinica"></img>
                                 <div className="clinica_info">
                                     <div className="info_clinica">
                                         <h3>Nome</h3>
-                                        <span>Clínica Possarle</span>
+                                        <span>{Clinic.nomeFantasia}</span>
                                     </div>
                                     <div className="info_clinica">
                                         <h3>Endereço</h3>
-                                        <span>R. Lira Dos Palmares, 124</span>
+                                        <span>{Clinic.endereco}</span>
                                     </div>
                                 </div>
                                 <div className="info_clinica horario">
                                     <h3>Horário de funcionamento</h3>
-                                    <span>Das 07:00 às 22:00</span>
+                                    <span>Das {Clinic.horarioAbertura} às {Clinic.horarioFechamento}</span>
                                 </div>
                             </div>
+                            );
+                            })
+                            }
                         </div>
                     </div>
                 </main>

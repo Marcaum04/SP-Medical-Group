@@ -33,7 +33,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// Lista todos os Usuário existentes
         /// </summary>
         /// <returns>Uma lista de usuários com o status code 200 - Ok</returns>
-        [Authorize(Roles = "1")]
+        [Authorize]
         [HttpGet]
         public IActionResult Listar()
         {
@@ -45,7 +45,7 @@ namespace senai_Spmed_webAPI.Controllers
         /// </summary>
         /// <param name="idClinica">id da clinica a ser buscado</param>
         /// <returns>Uma clinica encontrada com o status code 200 - Ok</returns>
-        [Authorize(Roles = "1")]
+        [Authorize]
         [HttpGet("{idClinica}")]
         public IActionResult BuscarPorId(int idClinica)
         {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { usuarioAutenticacao , parseJWT} from '../../services/auth'
 
 import Logo from '../../assets/img/Logo-Vermelho.png';
 import Home from '../../assets/img/home-icon.png';
@@ -13,14 +14,18 @@ import '../../assets/css/grid.css';
 export default function Header() {
 
     return (
-        <header>
+        <header className="header">
         <div className="container container_header">
             <img className="logo_header" src={Logo} alt="Logo Vermelho"></img>
             <nav className="nav_header">
                 <Link to="/"><img className="icone_nav" src={Home} alt="Icone home"></img></Link>
                 <Link to="/sobre-nos"><img className="icone_nav" src={SobreNos} alt="Icone Sobre nós"></img></Link>
-                <Link to="/consultas"><img className="icone_nav" src={Consultas} alt="Icone Consultas"></img></Link>
-                <Link to="/login"><img className="icone_nav" src={Perfil} alt="Icone Perfil"></img></Link>
+                <Link 
+                to={usuarioAutenticacao() === true ? (parseJWT().role === '1' ? '/consultas' : '/minhasconsultas') : '/login'}>
+                <img className="icone_nav" src={Consultas} alt="Icone Consultas"></img>
+                </Link>
+
+                <Link to={usuarioAutenticacao() === true ? (parseJWT().role === '1' ? '/perfil' : '/usuarios') : '/login'}><img className="icone_nav" src={Perfil} alt="Icone Perfil"></img></Link>
             </nav>
         </div>
     </header>

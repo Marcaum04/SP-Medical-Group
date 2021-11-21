@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&display=swap');
 
 main{
-    background-color: #01A632;
+    background-color: #090A1F;
 }
 
 .container_consultas{
@@ -78,7 +78,6 @@ main{
 }
 
 .quadrado_situacao{
-    background-color: green;
     height: 20px;
     width: 20px;
     margin-left: 10px;

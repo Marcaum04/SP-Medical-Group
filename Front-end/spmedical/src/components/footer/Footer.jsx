@@ -7,7 +7,8 @@ import '../../assets/css/grid.css';
 export default function Footer() {
 
     return (
-        <footer className="container">
+        <footer>
+            <div className="container container_footer">
             <img className="logo_footer" src={Logo} alt="Logo Vermelho"></img>
                 <div className="footer_info">
                     <span>E-mail</span>
@@ -17,5 +18,6 @@ export default function Footer() {
                     <span>Telefone</span>
                     <span>2569-3372</span>
                 </div>
+            </div>
         </footer>
 )}

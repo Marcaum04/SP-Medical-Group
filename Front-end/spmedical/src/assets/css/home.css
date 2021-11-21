@@ -46,7 +46,7 @@
 /* Cor de fundo */
 
 .container_quem_somos{
-    background-color: #4BC423;
+    background-color: #090A1F;
     padding-top:15px;
     padding-bottom: 3px;
 }
@@ -84,7 +84,7 @@
 
 /* Cor de fundo */
 .container_onde_estamos{
-    background-color: #01A632;
+    background-color: #33377a;
 }
 
 /* Quem somos */
@@ -101,11 +101,13 @@
     font-size: 50px;
 }
 
+/* Onde estamos */
+
 .clinica{
     padding: 20px 0px;
     border-radius: 20px;
     margin: 30px 0px;
-    width: 800px;
+    width: 1100px;
     
     display: flex;
     align-items: center;
@@ -138,5 +140,5 @@
 }
 
 .horario{
-    width: 200px;
+    width: 300px;
 }

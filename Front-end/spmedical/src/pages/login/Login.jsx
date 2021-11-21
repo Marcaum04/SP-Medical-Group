@@ -1,6 +1,5 @@
 import { Component } from "react";
 import axios from 'axios';
-import { parseJWT } from "../../services/auth";
 
 import '../../assets/css/login.css';
 
@@ -32,13 +31,7 @@ export default class Login extends Component {
         if (resposta.status === 200) {
           localStorage.setItem('usuario-login', resposta.data.token);
           this.setState({ isLoading: false });
-
-          if (parseJWT().role === '3') {
             this.props.history.push('/');
-          }
-          else{
-            this.props.history.push('/login');
-          }
         }
       })
       .catch(() => {

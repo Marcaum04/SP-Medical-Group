@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&display=swap');
 
 footer{
+    background-color: #090A1F;
+}
+
+.container_footer{
     display: flex;
     justify-content: space-between;
     align-items: center;

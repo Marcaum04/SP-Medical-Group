@@ -91,7 +91,13 @@ namespace senai_Spmed_webAPI.Repositories
 
         public Consulta BuscarPorId(int idConsulta)
         {
-            return ctx.Consulta.Include(m => m.IdMedicoNavigation).Include(p => p.IdPacienteNavigation).Include(s => s.IdSituacaoNavigation).FirstOrDefault(c => c.IdConsulta == idConsulta);
+            return ctx.Consulta
+               .Include(p => p.IdMedicoNavigation)
+               .Include(p => p.IdMedicoNavigation.IdUsuarioNavigation)
+               .Include(p => p.IdPacienteNavigation)
+               .Include(p => p.IdPacienteNavigation.IdUsuarioNavigation)
+               .Include(p => p.IdSituacaoNavigation)
+                .FirstOrDefault(c => c.IdConsulta == idConsulta);
         }
 
         public void Cadastrar(Consulta novaConsulta)
@@ -112,14 +118,22 @@ namespace senai_Spmed_webAPI.Repositories
 
         public List<Consulta> Listar()
         {
-            return ctx.Consulta.Include(m => m.IdMedicoNavigation).Include(p => p.IdPacienteNavigation).Include(s => s.IdSituacaoNavigation).ToList();
+            return ctx.Consulta
+               .Include(p => p.IdMedicoNavigation)
+               .Include(p => p.IdMedicoNavigation.IdUsuarioNavigation)
+               .Include(p => p.IdPacienteNavigation)
+               .Include(p => p.IdPacienteNavigation.IdUsuarioNavigation)
+               .Include(p => p.IdSituacaoNavigation)
+                .ToList();
         }
 
         public List<Consulta> ListarMinhas(int idUsuario)
         {
             return ctx.Consulta
                .Include(p => p.IdMedicoNavigation)
+               .Include(p => p.IdMedicoNavigation.IdUsuarioNavigation)
                .Include(p => p.IdPacienteNavigation)
+               .Include(p => p.IdPacienteNavigation.IdUsuarioNavigation)
                .Include(p => p.IdSituacaoNavigation)
                .Where(p => p.IdMedicoNavigation.IdUsuario == idUsuario || p.IdPacienteNavigation.IdUsuario == idUsuario)
                .ToList();
