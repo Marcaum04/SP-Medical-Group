@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import '../../assets/css/login.css';
 
@@ -47,7 +48,7 @@ export default class Login extends Component {
     return (
       <div>
         <header className="header-login">
-          <img className="logo" src={Logo} alt="Logo"></img>
+          <Link to="/"><img className="logo" src={Logo} alt="Logo"></img></Link>
         </header>
         <main className="container_login">
           <img src={Medicos} alt="médicos"></img>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Logo from '../../assets/img/Logo-Vermelho.png';
 
 import '../../assets/css/footer.css';
@@ -9,7 +11,7 @@ export default function Footer() {
     return (
         <footer>
             <div className="container container_footer">
-            <img className="logo_footer" src={Logo} alt="Logo Vermelho"></img>
+            <Link to="/"><img className="logo_footer" src={Logo} alt="Logo Vermelho"></img></Link>
                 <div className="footer_info">
                     <span>E-mail</span>
                     <span>spmedical.group@gmail.com</span>

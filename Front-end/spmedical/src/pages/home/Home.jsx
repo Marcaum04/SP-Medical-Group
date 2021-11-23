@@ -11,7 +11,7 @@ import Clinica from '../../assets/img/clinica.png';
 import Footer from '../../components/footer/Footer'
 import Header from '../../components/header/Header'
 
-export default class Login extends Component {
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
