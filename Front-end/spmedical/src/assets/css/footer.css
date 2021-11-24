@@ -12,7 +12,7 @@ footer{
 }
 
 .logo_footer{
-    height: 80px;
+    height: 100px;
 }
 
 .footer_info{
@@ -22,7 +22,7 @@ footer{
 }
 
 .footer_info span{
-    color: #FC4E57;
+    color: #FFFFFF;
     font-family: 'Archivo Narrow', sans-serif;
     font-size: 25px;
 }

@@ -1,7 +1,9 @@
 import { Component } from "react";
 import axios from 'axios';
+import { parseJWT } from "../../services/auth";
 
 import '../../assets/css/consultas.css';
+import '../../assets/css/cadastrar-consulta.css';
 import '../../assets/css/grid.css';
 
 import Footer from '../../components/footer/Footer'
@@ -31,13 +33,28 @@ export default class Consultas extends Component {
             .catch((erro) => console.log(erro));
     }
 
+    buscarMinhasConsultas = () => {
+        axios('http://localhost:5000/api/consultas/minhas', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    this.setState({ listaConsultas: resposta.data });
+                    console.log(this.state.listaConsultas);
+                }
+            })
+            .catch((erro) => console.log(erro));
+    }
+
 
     atualizaStateCampo = (campo) => {
         this.setState({ [campo.target.name]: campo.target.value })
     }
 
     componentDidMount() {
-        this.buscarConsultas();
+        parseJWT().role === '1' ? this.buscarConsultas() : this.buscarMinhasConsultas()
     }
 
     render() {
@@ -46,42 +63,80 @@ export default class Consultas extends Component {
                 <Header></Header>
                 <main>
                     <div className="container container_consultas">
+                    <form className="form-cadastro-consulta" action="">
+            <div class="cadastro-consulta">
+                <h1>Consulta</h1>
+                <div class="todos-campos">
+                    <div class="campos">
+                        <div class="campo">
+                            <label for="">Médico</label>
+                            <input type="number"/>
+                        </div>
+                        <div class="campo">
+                            <label for="">Paciente</label>
+                            <input type="number"/>
+                        </div>
+                        <div class="campo">
+                            <label for="situacao">Situação</label>
+                            <select class="situacao-cadastro" id="situacao" name="situacao">
+                                <option disabled class="neutro"> Escolha uma Situação</option>
+                                <option value="1"> Realizada</option>
+                                <option value="2"> Cancelada</option>
+                                <option value="3"> Agendada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="campos">
+                        <div class="campo-tempo">
+                            <label for="">Data</label>
+                            <input class="data" type="date"/>
+                        </div>
+                        <div class="campo-tempo">
+                            <label class="hora" for="">Hora</label>
+                            <input type="time"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
                         {this.state.listaConsultas.map((Consulta) => {
                             return (
-                                <div className="consulta" key={Consulta.idConsulta}>
-                                    <h1>Consulta {Consulta.idConsulta}</h1>
-                                    <div className="conteudo">
-                                        <div className="div_info">
-                                            <div className="info">
-                                                <h2>Médico</h2>
-                                                <span>{Consulta.idMedicoNavigation.idUsuarioNavigation.nomeUsuario}</span>
+                                <div key={Consulta.idConsulta}>
+                                    <div className={Consulta.idSituacaoNavigation.idSituacao === 1 ? "consulta consulta-verde" : (Consulta.idSituacaoNavigation.idSituacao === 2 ? "consulta consulta-vermelha" : "consulta consulta-amarela")}>
+                                        <h1>Consulta {Consulta.idConsulta}</h1>
+                                        <div className="conteudo">
+                                            <div className="div_info">
+                                                <div className="info">
+                                                    <h2>Médico</h2>
+                                                    <span>{Consulta.idMedicoNavigation.idUsuarioNavigation.nomeUsuario}</span>
+                                                </div>
+                                                <div className="info">
+                                                    <h2>Paciente</h2>
+                                                    <span>{Consulta.idPacienteNavigation.idUsuarioNavigation.nomeUsuario}</span>
+                                                </div>
+                                            </div>
+                                            <div className="div_info">
+                                                <div className="info">
+                                                    <h2>Data</h2>
+                                                    <span>{new Date(Consulta.dataeHora).toLocaleDateString('pt-br')}</span>
+                                                </div>
+                                                <div className="info">
+                                                    <h2>Hora</h2>
+                                                    <span>{new Date(Consulta.dataeHora).toLocaleTimeString()}</span>
+                                                </div>
                                             </div>
                                             <div className="info">
-                                                <h2>Paciente</h2>
-                                                <span>{Consulta.idPacienteNavigation.idUsuarioNavigation.nomeUsuario}</span>
+                                                <h2>Situação</h2>
+                                                <div className="situacao">
+                                                    <span>{Consulta.idSituacaoNavigation.descricao}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="div_info">
-                                            <div className="info">
-                                                <h2>Data</h2>
-                                                <span>{new Date(Consulta.dataeHora).toLocaleDateString('pt-br')}</span>
-                                            </div>
-                                            <div className="info">
-                                                <h2>Hora</h2>
-                                                <span>{new Date(Consulta.dataeHora).toLocaleTimeString()}</span>
-                                            </div>
+                                        <div className="info descricao">
+                                            <h2>Descrição</h2>
+                                            <p>{Consulta.descricao}</p>
                                         </div>
-                                        <div className="info">
-                                            <h2>Situação</h2>
-                                            <div className="situacao">
-                                                <span>{Consulta.idSituacaoNavigation.descricao}</span>
-                                                <div  className="quadrado_situacao"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="descricao">
-                                        <h2>Descrição</h2>
-                                        <p>{Consulta.descricao}</p>
                                     </div>
                                 </div>
                             );

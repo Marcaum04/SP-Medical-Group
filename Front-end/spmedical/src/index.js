@@ -8,9 +8,7 @@ import './index.css';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Consultas from './pages/consultas/Consultas';
-import ConsultasMedico from './pages/consultasMedico/ConsultasMedico';
 import AlterarDescricao from './pages/alterarDescricao/AlterarDescricao';
-import MinhasConsultas from './pages/minhasConsultas/MinhasConsultas';
 import NotFound from './pages/notFound/NotFound';
 
 import reportWebVitals from './reportWebVitals';
@@ -69,10 +67,8 @@ const routing = (
       <Switch>
         <Route exact path="/" component={Home} /> {/* Home */}
         <Route path="/login" component={Login} /> {/* Login */}
-        <PermissaoAdm path="/consultas" component={Consultas} /> {/* Consultas */}
-        <PermissaoMedico path="/consultasmedico" component={ConsultasMedico} /> {/* Consultas Medico */}
+        <Route path="/consultas" component={Consultas} /> {/* Consultas */}
         <PermissaoMedico path="/alterardescricao" component={AlterarDescricao} /> {/* Consultas Medico */}
-        <PermissaoComumMedico path="/minhasconsultas" component={MinhasConsultas} /> {/* Minhas Consultas */}
         <Route path="/notFound" component={NotFound} /> {/* Not Found */}
         <Redirect to="/notFound" /> {/* Redireciona para Not Found caso não encontre nenhuma rota */}
       </Switch>
