@@ -13,8 +13,6 @@ main{
 }
 
 .consulta{
-    background-color: rgba(255, 255, 255, 80%);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,6 +24,18 @@ main{
 
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+.consulta-verde{
+    background-color: rgba(70, 255, 60);
+}
+
+.consulta-amarela{
+    background-color: rgba(210, 210, 0);
+}
+
+.consulta-vermelha{
+    background-color: rgba(255, 30, 60);
 }
 
 .consulta h1{
@@ -75,13 +85,6 @@ main{
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.quadrado_situacao{
-    height: 20px;
-    width: 20px;
-    margin-left: 10px;
-    border: black solid 0.5px;
 }
 
 .descricao{
