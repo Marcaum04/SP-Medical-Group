@@ -31,7 +31,7 @@ namespace senai_Spmed_webAPI.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=NOTE0113D3\\SQLEXPRESS; Initial Catalog=SPMED_MARCAUM; user id=sa; pwd=Senai@132;");
+                optionsBuilder.UseSqlServer("Data Source=MARCAUM\\SQLEXPRESS; Initial Catalog=SPMED_MARCAUM; user id=sa; pwd=senai@132;");
             }
         }
 
