@@ -65,7 +65,7 @@ h1{
 }
 
 /* Input de situação */
-.situacao-cadastro{
+.select-cadastro{
     cursor: pointer;
     border: 1px solid #DDDDDD;
     border-radius: 5px 5px 0px 0px;
@@ -81,7 +81,7 @@ h1{
     
     background-color: #FFFFFF;
     background-image: url("../img/seta.png");
-    background-position: right 5px top 50%;
+    background-position: right 3px top 50%;
     background-repeat: no-repeat;
     background-size: 10px;
     

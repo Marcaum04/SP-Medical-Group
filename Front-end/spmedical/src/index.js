@@ -1,14 +1,13 @@
-import React from 'react';
+import React from 'react';  
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Redirect ,Switch } from 'react-router-dom';
-import { parseJWT, usuarioAutenticacao } from './services/auth';
+// import { parseJWT, usuarioAutenticacao } from './services/auth';
 
 import './index.css';
 
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Consultas from './pages/consultas/Consultas';
-import AlterarDescricao from './pages/alterarDescricao/AlterarDescricao';
 import NotFound from './pages/notFound/NotFound';
 
 import reportWebVitals from './reportWebVitals';

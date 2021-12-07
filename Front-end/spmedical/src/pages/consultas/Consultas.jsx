@@ -15,6 +15,8 @@ export default class Consultas extends Component {
         this.state = {
             isLoading: false,
             listaConsultas: [],
+            listaPacientes: [],
+            listaMedicos: [],
             idConsulta: '',
             idMedico: 0,
             idPaciente: 0,
@@ -48,7 +50,34 @@ export default class Consultas extends Component {
             .then((resposta) => {
                 if (resposta.status === 200) {
                     this.setState({ listaConsultas: resposta.data });
-                    console.log(this.state.listaConsultas);
+                }
+            })
+            .catch((erro) => console.log(erro));
+    }
+
+    buscarPacientes = () => {
+        axios('http://localhost:5000/api/pacientes', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    this.setState({ listaPacientes: resposta.data });
+                }
+            })
+            .catch((erro) => console.log(erro));
+    }
+
+    buscarMedicos = () => {
+        axios('http://localhost:5000/api/medicos', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    this.setState({ listaMedicos: resposta.data });
                 }
             })
             .catch((erro) => console.log(erro));
@@ -57,14 +86,14 @@ export default class Consultas extends Component {
     cadastrarConsulta = (event) => {
         event.preventDefault();
 
-        this.setState({isLoading: true })
+        this.setState({ isLoading: true })
 
         let consulta = {
             idMedico: this.state.idMedico,
             idPaciente: this.state.idPaciente,
             idSituacao: parseInt(this.state.idSituacao),
-            dataeHora: this.state.data + ' ' + this.state.hora
-          };
+            dataeHora: new Date(this.state.data + ' ' + this.state.hora)
+        };
 
         axios.post('http://localhost:5000/api/consultas', consulta, {
             headers: {
@@ -74,13 +103,16 @@ export default class Consultas extends Component {
 
             .then((resposta) => {
                 if (resposta.status === 201) {
-                    parseJWT().role === '1' ? this.buscarConsultas() : this.buscarMinhasConsultas()
-                    this.setState({isLoading: false })
+                    this.buscarConsultas()
+                    this.setState({ isLoading: false })
                 }
             })
             .catch((resposta) => console.log(resposta),
-                this.setState({isLoading: false })
-        )
+                this.setState({ isLoading: false })
+            ).then((resposta) =>{
+                this.limparCampos()
+            }
+            )
     }
 
 
@@ -89,17 +121,26 @@ export default class Consultas extends Component {
     }
 
     limparCampos = () => {
-        this.setState({  
+        this.setState({
             idConsulta: '',
             idMedico: 0,
             idPaciente: 0,
             idSituacao: 0,
             data: '',
-            hora: '' })
-      };
+            hora: ''
+        })
+    };
+
+    alterar
 
     componentDidMount() {
-        parseJWT().role === '1' ? this.buscarConsultas() : this.buscarMinhasConsultas()
+        if (parseJWT().role === '1') {
+            this.buscarConsultas()
+            this.buscarPacientes()
+            this.buscarMedicos()
+        } else {
+            this.buscarMinhasConsultas()
+        }
     }
 
     render() {
@@ -107,37 +148,61 @@ export default class Consultas extends Component {
             <div>
                 <Header></Header>
                 <main>
-                    <div className="container container_consultas">
+                    {parseJWT().role === '1' ?
                         <form className="form-cadastro-consulta" onSubmit={this.cadastrarConsulta}>
                             <div className="cadastro-consulta">
                                 <h1>Consulta</h1>
                                 <div className="todos-campos">
                                     <div className="campos">
-                                        <div className="campo-consulta">
-                                            <label for="">Médico</label>
-                                            <input
-                                                name="idMedico"
-                                                type="number"
-                                                value={this.state.idMedico}
-                                                onChange={this.atualizaStateCampo} />
-                                        </div>
-                                        <div className="campo-consulta">
-                                            <label for="">Paciente</label>
-                                            <input
-                                                name="idPaciente"
-                                                type="number"
-                                                value={this.state.idPaciente}
-                                                onChange={this.atualizaStateCampo} />
-                                        </div>
-                                        <div className="campo-consulta">
-                                            <label for="situacao">Situação</label>
+                                        <div className='campo-consulta'>
+                                            <label>Medico</label>
                                             <select
-                                                className="situacao-cadastro"
+                                                name="idMedico"
+                                                className='select-cadastro'
+                                                value={this.state.idMedico}
+                                                onChange={this.atualizaStateCampo}
+                                            >
+                                                <option value="0" disabled>
+                                                    Selecione o Medico
+                                                </option>
+                                                {this.state.listaMedicos.map((medico) => {
+                                                    return (
+                                                        <option key={medico.idMedico} value={medico.idMedico}>
+                                                            {medico.idUsuarioNavigation.nomeUsuario}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                        <div className='campo-consulta'>
+                                            <label>Paciente</label>
+                                            <select
+                                                name="idPaciente"
+                                                className='select-cadastro'
+                                                value={this.state.idPaciente}
+                                                onChange={this.atualizaStateCampo}
+                                            >
+                                                <option value="0" disabled>
+                                                    Selecione o Paciente
+                                                </option>
+                                                {this.state.listaPacientes.map((paciente) => {
+                                                    return (
+                                                        <option key={paciente.idPaciente} value={paciente.idPaciente}>
+                                                            {paciente.idUsuarioNavigation.nomeUsuario}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                        <div className="campo-consulta">
+                                            <label>Situação</label>
+                                            <select
+                                                className="select-cadastro"
                                                 id="situacao"
                                                 name="idSituacao"
                                                 value={this.state.idSituacao}
                                                 onChange={this.atualizaStateCampo}>
-                                                <option value="" disabled className="neutro"> Escolha uma Situação</option>
+                                                <option value="0" disabled className="neutro"> Escolha a Situação</option>
                                                 <option value="1"> Realizada</option>
                                                 <option value="2"> Cancelada</option>
                                                 <option value="3"> Agendada</option>
@@ -146,7 +211,7 @@ export default class Consultas extends Component {
                                     </div>
                                     <div className="campos">
                                         <div className="campo-tempo">
-                                            <label for="">Data</label>
+                                            <label>Data</label>
                                             <input
                                                 name="data"
                                                 className="data"
@@ -155,7 +220,7 @@ export default class Consultas extends Component {
                                                 onChange={this.atualizaStateCampo} />
                                         </div>
                                         <div className="campo-tempo">
-                                            <label className="hora" for="">Hora</label>
+                                            <label className="hora">Hora</label>
                                             <input
                                                 name="hora"
                                                 type="time"
@@ -166,13 +231,17 @@ export default class Consultas extends Component {
                                 </div>
                             </div>
                             {this.state.isLoading === true && (
-                  <button type="submit">Loading...</button>
-                )}
+                                <button type="submit">Loading...</button>
+                            )}
 
-                {this.state.isLoading === false && (
-                  <button onClick={this.limparCampos} type="submit">Cadastrar</button>
-                )}
+                            {this.state.isLoading === false && (
+                                <button  type="submit">Cadastrar</button>
+                            )}
                         </form>
+                        :
+                        <div></div>}
+                    <div className="container container_consultas">
+
                         {this.state.listaConsultas.map((Consulta) => {
                             return (
                                 <div key={Consulta.idConsulta}>
@@ -199,12 +268,27 @@ export default class Consultas extends Component {
                                                     <span>{new Date(Consulta.dataeHora).toLocaleTimeString()}</span>
                                                 </div>
                                             </div>
-                                            <div className="info">
-                                                <h2>Situação</h2>
-                                                <div className="situacao">
-                                                    <span>{Consulta.idSituacaoNavigation.descricao}</span>
+                                            {parseJWT().role === '2' ?
+                                                <div className="div_info">
+                                                    <div className="info">
+                                                        <h2>Situação</h2>
+                                                        <div className="situacao">
+                                                            <span>{Consulta.idSituacaoNavigation.descricao}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="info">
+                                                        <button></button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                :
+                                                <div className="div_info">
+                                                    <div className="info">
+                                                        <h2>Situação</h2>
+                                                        <div className="situacao">
+                                                            <span>{Consulta.idSituacaoNavigation.descricao}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>}
                                         </div>
                                         <div className="info descricao">
                                             <h2>Descrição</h2>
