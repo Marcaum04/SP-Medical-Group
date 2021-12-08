@@ -87,6 +87,27 @@ main{
     justify-content: space-between;
 }
 
+.info button{
+    width: 170px;
+    height: 30px;
+    border-radius: 30px 110px 30px 110px;
+    
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 17px;
+    font-weight: bolder;
+
+    border: none;
+    background-color: #313588;
+}
+
+.info button:hover{
+    animation-delay: 2000ms;
+    background-color: #292a55;
+    color: rgb(223, 223, 223);
+    cursor: pointer;
+}
+
 .descricao{
     width: 700px;
 }

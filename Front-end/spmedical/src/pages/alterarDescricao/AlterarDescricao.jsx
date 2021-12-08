@@ -23,7 +23,7 @@ export default class AlterarDescricao extends Component {
 
         this.setState({ erroMensagem: "", isLoading: true })
 
-        axios.patch(`http://localhost:5000/api/consultas/descricao/${this.state.idConsulta}`, {
+        axios.patch(`http://localhost:5000/api/consultas/descricao/${this.state.idConsultaAlterada}`, {
 
             Descricao: this.state.descricao,
 

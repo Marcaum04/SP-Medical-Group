@@ -1,8 +1,9 @@
 /* Titulo */
 h1{
     color: black;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 55px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 30px;
+    font-weight: lighter;
 }
 
 .form-cadastro-consulta{
@@ -50,7 +51,7 @@ h1{
 .campo-consulta label,
 .campo-tempo label{
     color: black;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Archivo Narrow', sans-serif;
     font-size: 25px;  
     font-weight: bold;  
 }
@@ -70,10 +71,10 @@ h1{
     border: 1px solid #DDDDDD;
     border-radius: 5px 5px 0px 0px;
     
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Archivo Narrow', sans-serif;
     font-weight: bold;
     text-align: center;
-    font-size: 15px;
+    font-size: 18px;
 
     appearance: none;
     -webkit-appearance: none;
@@ -112,7 +113,7 @@ h1{
     border-radius: 30px 110px 30px 110px;
     
     color: white;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Archivo Narrow', sans-serif;
     font-size: 25px;
     font-weight: bolder;
 

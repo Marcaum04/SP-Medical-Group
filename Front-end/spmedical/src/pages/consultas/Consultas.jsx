@@ -4,6 +4,7 @@ import { parseJWT } from "../../services/auth";
 
 import '../../assets/css/consultas.css';
 import '../../assets/css/cadastrar-consulta.css';
+import '../../assets/css/alterar-descricao.css';
 import '../../assets/css/grid.css';
 
 import Footer from '../../components/footer/Footer'
@@ -22,7 +23,9 @@ export default class Consultas extends Component {
             idPaciente: 0,
             idSituacao: 0,
             data: '',
-            hora: ''
+            hora: '',
+            idConsultaAlterada: 0,
+            descricao: ''
         }
     };
 
@@ -109,12 +112,40 @@ export default class Consultas extends Component {
             })
             .catch((resposta) => console.log(resposta),
                 this.setState({ isLoading: false })
-            ).then((resposta) =>{
+            )
+            .then(() => {
                 this.limparCampos()
             }
             )
     }
 
+
+    atualizaDescricao = (event) => {
+        event.preventDefault();
+
+        this.setState({ isLoading: true })
+
+        axios.patch(`http://localhost:5000/api/consultas/descricao/${this.state.idConsultaAlterada}`, {
+            Descricao: this.state.descricao,
+        }, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then((resposta) => {
+                if (resposta.status === 204) {
+                    this.setState({ isLoading: false, descricao: '' });
+                    this.buscarMinhasConsultas();
+                }
+            })
+            .catch(() => {
+                this.setState({isLoading: false })
+            });
+    }
+
+    selecionarConsulta = (Consulta) => {
+        this.setState({ idConsultaAlterada: Consulta.idConsulta });
+    }
 
     atualizaStateCampo = (campo) => {
         this.setState({ [campo.target.name]: campo.target.value })
@@ -131,8 +162,6 @@ export default class Consultas extends Component {
         })
     };
 
-    alterar
-
     componentDidMount() {
         if (parseJWT().role === '1') {
             this.buscarConsultas()
@@ -147,7 +176,7 @@ export default class Consultas extends Component {
         return (
             <div>
                 <Header></Header>
-                <main>
+                <main className='main-consultas'>
                     {parseJWT().role === '1' ?
                         <form className="form-cadastro-consulta" onSubmit={this.cadastrarConsulta}>
                             <div className="cadastro-consulta">
@@ -235,13 +264,36 @@ export default class Consultas extends Component {
                             )}
 
                             {this.state.isLoading === false && (
-                                <button  type="submit">Cadastrar</button>
+                                <button type="submit">Cadastrar</button>
                             )}
                         </form>
                         :
                         <div></div>}
-                    <div className="container container_consultas">
 
+                    {parseJWT().role === '2' ? 
+                    <form className="form-descricao" onSubmit={this.atualizaDescricao}>
+                    <div className="cadastro">
+                        <h1>Alterando a Consulta {this.state.idConsultaAlterada}</h1>
+                            <div className="campo-descricao">
+                                <label>Descrição</label>
+                                <textarea
+                                    name="descricao"
+                                    cols="30"
+                                    maxLength="100"
+                                    value={this.state.descricao}
+                                    onChange={this.atualizaStateCampo}></textarea>
+                        </div>
+                    </div>
+          {
+            this.state.isLoading === true &&
+            <button type="submit" disabled>Loading...</button>
+          }
+          {
+            this.state.isLoading === false &&
+            <button disabled={this.state.descricao === '' ? 'none' : ''} type="submit">Alterar</button>
+          }
+                </form> : <div></div>}
+                    <div className="container container_consultas">
                         {this.state.listaConsultas.map((Consulta) => {
                             return (
                                 <div key={Consulta.idConsulta}>
@@ -277,7 +329,7 @@ export default class Consultas extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="info">
-                                                        <button></button>
+                                                        <button onClick={() => this.selecionarConsulta(Consulta)}>Alterar Descrição</button>
                                                     </div>
                                                 </div>
                                                 :
