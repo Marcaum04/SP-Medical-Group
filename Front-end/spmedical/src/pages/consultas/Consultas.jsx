@@ -67,59 +67,64 @@ export default class Consultas extends Component {
                 <Header></Header>
                 <main>
                     <div className="container container_consultas">
-                        <form className="form-cadastro-consulta" action="">
-                            <div class="cadastro-consulta">
-                                <h1>Consulta</h1>
-                                <div class="todos-campos">
-                                    <div class="campos">
-                                        <div class="campo-consulta">
-                                            <label for="">Médico</label>
-                                            <input
-                                                type="number"
-                                                value={this.state.idMedico}
-                                                onChange={this.atualizaStateCampo} />
-                                        </div>
-                                        <div class="campo-consulta">
-                                            <label for="">Paciente</label>
-                                            <input
-                                                type="number"
-                                                value={this.state.idPaciente}
-                                                onChange={this.atualizaStateCampo} />
-                                        </div>
-                                        <div class="campo-consulta">
-                                            <label for="situacao">Situação</label>
-                                            <select
-                                                class="situacao-cadastro"
-                                                id="situacao"
-                                                name="situacao"
-                                                value={this.state.idTipoEvento}
-                                                onChange={this.atualizaStateCampo}>
-                                                <option value="" disabled class="neutro"> Escolha uma Situação</option>
-                                                <option value="1"> Realizada</option>
-                                                <option value="2"> Cancelada</option>
-                                                <option value="3"> Agendada</option>
-                                            </select>
-                                        </div>
+                    {
+                        parseJWT().role === '1' ? 
+                        (<form className="form-cadastro-consulta" action="">
+                        <div class="cadastro-consulta">
+                            <h1>Consulta</h1>
+                            <div class="todos-campos">
+                                <div class="campos">
+                                    <div class="campo-consulta">
+                                        <label for="">Médico</label>
+                                        <input
+                                            type="number"
+                                            value={this.state.idMedico}
+                                            onChange={this.atualizaStateCampo} />
                                     </div>
-                                    <div class="campos">
-                                        <div class="campo-tempo">
-                                            <label for="">Data</label>
-                                            <input
-                                                class="data"
-                                                type="date"
-                                                onChange={this.atualizaStateCampo} />
-                                        </div>
-                                        <div class="campo-tempo">
-                                            <label class="hora" for="">Hora</label>
-                                            <input
-                                                type="time"
-                                                onChange={this.atualizaStateCampo} />
-                                        </div>
+                                    <div class="campo-consulta">
+                                        <label for="">Paciente</label>
+                                        <input
+                                            type="number"
+                                            value={this.state.idPaciente}
+                                            onChange={this.atualizaStateCampo} />
+                                    </div>
+                                    <div class="campo-consulta">
+                                        <label for="situacao">Situação</label>
+                                        <select
+                                            class="situacao-cadastro"
+                                            id="situacao"
+                                            name="situacao"
+                                            value={this.state.idTipoEvento}
+                                            onChange={this.atualizaStateCampo}>
+                                            <option value="" disabled class="neutro"> Escolha uma Situação</option>
+                                            <option value="1"> Realizada</option>
+                                            <option value="2"> Cancelada</option>
+                                            <option value="3"> Agendada</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="campos">
+                                    <div class="campo-tempo">
+                                        <label for="">Data</label>
+                                        <input
+                                            class="data"
+                                            type="date"
+                                            onChange={this.atualizaStateCampo} />
+                                    </div>
+                                    <div class="campo-tempo">
+                                        <label class="hora" for="">Hora</label>
+                                        <input
+                                            type="time"
+                                            onChange={this.atualizaStateCampo} />
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit">Cadastrar</button>
-                        </form>
+                        </div>
+                        <button type="submit">Cadastrar</button>
+                    </form>) : (<div></div>)
+                    }
+                        
+
                         {this.state.listaConsultas.map((Consulta) => {
                             return (
                                 <div key={Consulta.idConsulta}>
